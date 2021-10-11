@@ -76,7 +76,7 @@ __starts with ! (exclamation mark)__
 \u2022 `!unmute`  unmute the VC userbot
 """
 
-USERBOT_REPO = f"""{emoji.ROBOT} **Telegram Voice Chat UserBot**
+USERBOT_REPO = f"""{emoji.ROBOT} **UNTUK VCG**
 
 - Repository: [GitHub](https://github.com/LushaiMusic/VC-UserBot)
 - License: AGPL-3.0-or-later"""
@@ -130,9 +130,9 @@ class MusicPlayer(object):
             pl = f"{emoji.NO_ENTRY} empty playlist"
         else:
             if len(playlist) == 1:
-                pl = f"{emoji.REPEAT_SINGLE_BUTTON} **Playlist**:\n"
+                pl = f"{emoji.REPEAT_SINGLE_BUTTON} **kumpulan lagu jamet**:\n"
             else:
-                pl = f"{emoji.PLAY_BUTTON} **Playlist**:\n"
+                pl = f"{emoji.PLAY_BUTTON} **kumpulan lagu jamet**:\n"
             pl += "\n".join([
                 f"**{i}**. **[{x.audio.title}]({x.link})**"
                 for i, x in enumerate(playlist)
@@ -151,9 +151,9 @@ mp = MusicPlayer()
 async def network_status_changed_handler(context, is_connected: bool):
     if is_connected:
         mp.chat_id = MAX_CHANNEL_ID - context.full_chat.id
-        await send_text(f"{emoji.CHECK_MARK_BUTTON} joined the voice chat")
+        await send_text(f"{emoji.CHECK_MARK_BUTTON} NAIK VCG KALI AJA ADA YANG DESAH")
     else:
-        await send_text(f"{emoji.CROSS_MARK_BUTTON} left the voice chat")
+        await send_text(f"{emoji.CROSS_MARK_BUTTON} TURUN DULU ATAS PADA ALAY")
         mp.chat_id = None
 
 
@@ -302,7 +302,7 @@ async def join_group_call(client, m: Message):
         await mp.group_call.start(m.chat.id)
         await m.delete()
     if group_call and group_call.is_connected:
-        await m.reply_text(f"{emoji.ROBOT} already joined a voice chat")
+        await m.reply_text(f"{emoji.ROBOT} siap meluncur ke vcg cuk")
 
 
 @Client.on_message(main_filter
@@ -342,7 +342,7 @@ async def list_voice_chat(client, m: Message):
 async def stop_playing(_, m: Message):
     group_call = mp.group_call
     group_call.stop_playout()
-    reply = await m.reply_text(f"{emoji.STOP_BUTTON} stopped playing")
+    reply = await m.reply_text(f"{emoji.STOP_BUTTON} stop lagu jamet")
     await mp.update_start_time(reset=True)
     mp.playlist.clear()
     await _delay_delete_messages((reply, m), DELETE_DELAY)
@@ -372,7 +372,7 @@ async def restart_playing(_, m: Message):
 async def pause_playing(_, m: Message):
     mp.group_call.pause_playout()
     await mp.update_start_time(reset=True)
-    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} paused",
+    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} bentar mau ee",
                                quote=False)
     mp.msg['pause'] = reply
     await m.delete()
@@ -420,7 +420,7 @@ async def clean_raw_pcm(client, m: Message):
 async def mute(_, m: Message):
     group_call = mp.group_call
     group_call.set_is_mute(True)
-    reply = await m.reply_text(f"{emoji.MUTED_SPEAKER} muted")
+    reply = await m.reply_text(f"{emoji.MUTED_SPEAKER} kau diam")
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
 
